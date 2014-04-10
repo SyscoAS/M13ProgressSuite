@@ -16,6 +16,8 @@
 /**A UINavagationController category that adds a progress view to the UINavigationBar.*/
 @interface UINavigationController (M13ProgressViewBar)
 
+@property (nonatomic, strong) UIColor *indeterminatedColor;
+
 /**@name Actions*/
 
 /**Show the progress bar.*/
