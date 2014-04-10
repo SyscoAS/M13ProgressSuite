@@ -31,6 +31,7 @@
 
 - (void)viewDidLoad
 {
+    [self.navigationController setIndeterminatedColor:[UIColor redColor]];
     [self.navigationController showProgress];
     [super viewDidLoad];
 	// Do any additional setup after loading the view.

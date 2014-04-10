@@ -20,6 +20,20 @@ static char isShowingProgressKey;
 
 @implementation UINavigationController (M13ProgressViewBar)
 
+#pragma mark Properties
+
+NSString const *key = @"com.BrandonMcQuilkin.M13ProgressSuite.M13ProgressViewBar.IndeterminatedColor";
+
+- (void)setIndeterminatedColor:(UIColor *)indeterminatedColor
+{
+    objc_setAssociatedObject(self, &key, indeterminatedColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIColor *)indeterminatedColor
+{
+    return objc_getAssociatedObject(self, &key);
+}
+
 #pragma mark Title
 
 - (void)setProgressTitle:(NSString *)title
@@ -247,7 +261,12 @@ static char isShowingProgressKey;
         UIBezierPath *fillPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, stripeWidth * 4.0, stripeWidth * 4.0)];
         [fillPath fill];
         //Draw the stripes
-        [[UIColor whiteColor] setFill];
+        if ([self indeterminatedColor]) {
+            [[self indeterminatedColor] setFill];
+        }
+        else {
+            [[UIColor whiteColor] setFill];
+        }
         for (int i = 0; i < 4; i++) {
             //Create the four inital points of the fill shape
             CGPoint bottomLeft = CGPointMake(-(stripeWidth * 4.0), stripeWidth * 4.0);
